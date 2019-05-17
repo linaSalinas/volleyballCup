@@ -39,7 +39,7 @@
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label fx:id="LabelSyst" text="Label" BorderPane.alignment="CENTER">
+                                    <Label fx:id="LabelSyst" text="--" BorderPane.alignment="CENTER">
                                        <padding>
                                           <Insets bottom="15.0" />
                                        </padding>
@@ -65,7 +65,7 @@
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label text="Label" BorderPane.alignment="CENTER">
+                                    <Label text="--" BorderPane.alignment="CENTER">
                                        <padding>
                                           <Insets bottom="15.0" />
                                        </padding>
