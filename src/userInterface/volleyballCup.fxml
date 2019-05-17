@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="591.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <tabs>
+    <Tab text="Untitled Tab 1">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <right>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                  </GridPane>
+               </right>
+               <left>
+                  <BorderPane prefHeight="371.0" prefWidth="292.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <BorderPane>
+                                 <center>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <TextField fx:id="txtData" />
+                                          <Button fx:id="BottonExplore" mnemonicParsing="false" text="Explore" />
+                                          <Button fx:id="ButtonLoad" mnemonicParsing="false" text="Load" />
+                                       </children>
+                                    </HBox>
+                                 </center>
+                                 <top>
+                                    <Label alignment="TOP_LEFT" text="Load data" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets right="200.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label fx:id="LabelSyst" text="Label" BorderPane.alignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="15.0" />
+                                       </padding>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                              <BorderPane>
+                                 <center>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0">
+                                       <children>
+                                          <Label text="id" />
+                                          <TextField />
+                                          <Button fx:id="ButtonSearchSpectators" mnemonicParsing="false" text="Search" />
+                                          <Label fx:id="LabelTimeSpec" text="Time:" />
+                                       </children>
+                                    </HBox>
+                                 </center>
+                                 <top>
+                                    <Label prefHeight="18.0" prefWidth="154.0" text="Search spectators" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets right="200.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </top>
+                                 <bottom>
+                                    <Label text="Label" BorderPane.alignment="CENTER">
+                                       <padding>
+                                          <Insets bottom="15.0" />
+                                       </padding>
+                                    </Label>
+                                 </bottom>
+                              </BorderPane>
+                              <BorderPane>
+                                 <center>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="id" />
+                                          <TextField />
+                                          <Button fx:id="ButtonSearchParticipant" mnemonicParsing="false" text="Search" />
+                                          <Label fx:id="TimeParticipant" text="Time:" />
+                                       </children>
+                                    </HBox>
+                                 </center>
+                                 <top>
+                                    <Label prefHeight="17.0" prefWidth="108.0" text="Search participant" BorderPane.alignment="CENTER">
+                                       <BorderPane.margin>
+                                          <Insets right="200.0" />
+                                       </BorderPane.margin>
+                                    </Label>
+                                 </top>
+                              </BorderPane>
+                           </children>
+                        </VBox>
+                     </center>
+                  </BorderPane>
+               </left>
+               <bottom>
+                  <HBox prefHeight="39.0" prefWidth="591.0" BorderPane.alignment="CENTER" />
+               </bottom>
+               <top>
+                  <HBox alignment="CENTER" prefHeight="65.0" prefWidth="591.0" BorderPane.alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="73.0" text="Banner">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </HBox>
+               </top>
+            </BorderPane>
+         </content></Tab>
+    <Tab text="Untitled Tab 2" />
+  </tabs>
+</TabPane>
