@@ -7,31 +7,15 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="591.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="591.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.EventController">
   <tabs>
     <Tab text="Untitled Tab 1">
          <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
-               <right>
-                  <GridPane BorderPane.alignment="CENTER">
-                    <columnConstraints>
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                    </columnConstraints>
-                    <rowConstraints>
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                  </GridPane>
-               </right>
                <left>
                   <BorderPane prefHeight="371.0" prefWidth="292.0" BorderPane.alignment="CENTER">
                      <center>
@@ -42,8 +26,8 @@
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <TextField fx:id="txtData" />
-                                          <Button fx:id="BottonExplore" mnemonicParsing="false" text="Explore" />
-                                          <Button fx:id="ButtonLoad" mnemonicParsing="false" text="Load" />
+                                          <Button fx:id="BottonExplore" mnemonicParsing="false" onAction="#explore" text="Explore" />
+                                          <Button fx:id="ButtonLoad" mnemonicParsing="false" onAction="#load" text="Load" />
                                        </children>
                                     </HBox>
                                  </center>
@@ -68,7 +52,7 @@
                                        <children>
                                           <Label text="id" />
                                           <TextField />
-                                          <Button fx:id="ButtonSearchSpectators" mnemonicParsing="false" text="Search" />
+                                          <Button fx:id="ButtonSearchSpectators" mnemonicParsing="false" onAction="#searchSpectators" text="Search" />
                                           <Label fx:id="LabelTimeSpec" text="Time:" />
                                        </children>
                                     </HBox>
@@ -94,7 +78,7 @@
                                        <children>
                                           <Label text="id" />
                                           <TextField />
-                                          <Button fx:id="ButtonSearchParticipant" mnemonicParsing="false" text="Search" />
+                                          <Button fx:id="ButtonSearchParticipant" mnemonicParsing="false" onAction="#searchParticipant" text="Search" />
                                           <Label fx:id="TimeParticipant" text="Time:" />
                                        </children>
                                     </HBox>
@@ -126,6 +110,20 @@
                      </children>
                   </HBox>
                </top>
+               <right>
+                  <BorderPane prefHeight="284.0" prefWidth="273.0" BorderPane.alignment="CENTER">
+                     <top>
+                        <Label prefHeight="27.0" prefWidth="98.0" text="See Info" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <BorderPane.margin>
+                              <Insets right="200.0" />
+                           </BorderPane.margin>
+                        </Label>
+                     </top>
+                  </BorderPane>
+               </right>
             </BorderPane>
          </content></Tab>
     <Tab text="Untitled Tab 2" />
