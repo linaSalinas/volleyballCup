@@ -1,7 +1,5 @@
 package model;
 
-import javafx.scene.image.Image;
-
 public class Participant {
 	
 	private String id;
