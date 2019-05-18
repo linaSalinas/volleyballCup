@@ -1,0 +1,29 @@
+//___________________________________________________________________
+.button{
+	-fx-background-color: cornflowerblue; -fx-text-fill: white;
+}
+.background{
+	-fx-background-color: lavender; -fx-text-fill: white;
+}
+.borderPane{
+    -fx-border-color: dodgerblue;
+    -fx-border-width: 3px;
+    -fx-padding: 10;
+    -fx-spacing: 8;
+}
+.borderPane2{
+	-fx-border-color: dodgerblue;
+    -fx-border-width: 1px;
+}
+.fancytext {
+    -fx-font: 35px Tahoma;
+    -fx-stroke: black;
+}
+
+//___________________________________________________________________
+
+.titleText{
+	-fx-font: 15px Tahoma;
+   	-fx-stroke: black;
+}
+//___________________________________________________________________

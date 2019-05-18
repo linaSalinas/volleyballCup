@@ -6,90 +6,149 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="417.0" prefWidth="591.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.EventController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="533.0" prefWidth="765.0" styleClass="background" stylesheets="@css/theme.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="userInterface.EventController">
   <tabs>
-    <Tab text="Untitled Tab 1">
+    <Tab text="Searching">
          <content>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <left>
-                  <BorderPane prefHeight="371.0" prefWidth="292.0" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="400.0" prefWidth="325.0" BorderPane.alignment="CENTER">
                      <center>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                        <VBox alignment="CENTER" prefHeight="400.0" prefWidth="345.0" BorderPane.alignment="CENTER">
                            <children>
-                              <BorderPane>
+                              <BorderPane prefHeight="99.0" prefWidth="315.0" styleClass="borderPane2" stylesheets="@css/theme.css">
                                  <center>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <TextField fx:id="txtData" />
-                                          <Button fx:id="BottonExplore" mnemonicParsing="false" onAction="#explore" text="Explore" />
-                                          <Button fx:id="ButtonLoad" mnemonicParsing="false" onAction="#load" text="Load" />
+                                          <Button mnemonicParsing="false" onAction="#exploreForFilesToLoad" stylesheets="@css/theme.css" text="Explore">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Button>
+                                          <Button mnemonicParsing="false" onAction="#load" stylesheets="@css/theme.css" text="Load">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Button>
                                        </children>
                                     </HBox>
                                  </center>
                                  <top>
-                                    <Label alignment="TOP_LEFT" text="Load data" BorderPane.alignment="CENTER">
+                                    <Label alignment="TOP_LEFT" styleClass="titleText" stylesheets="@css/theme.css" text="Load data" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets right="200.0" />
+                                          <Insets top="5.0" />
                                        </BorderPane.margin>
+                                       <font>
+                                          <Font name="Lato Regular" size="12.0" />
+                                       </font>
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label fx:id="LabelSyst" text="--" BorderPane.alignment="CENTER">
+                                    <Label fx:id="dataMssg" text="--" BorderPane.alignment="CENTER">
                                        <padding>
                                           <Insets bottom="15.0" />
                                        </padding>
                                     </Label>
                                  </bottom>
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
                               </BorderPane>
-                              <BorderPane>
+                              <BorderPane prefHeight="128.0" prefWidth="315.0" stylesheets="@css/theme.css">
                                  <center>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="240.0">
+                                    <HBox alignment="CENTER" prefHeight="62.0" prefWidth="327.0">
                                        <children>
-                                          <Label text="id" />
-                                          <TextField />
-                                          <Button fx:id="ButtonSearchSpectators" mnemonicParsing="false" onAction="#searchSpectators" text="Search" />
-                                          <Label fx:id="LabelTimeSpec" text="Time:" />
+                                          <Label text="id">
+                                             <HBox.margin>
+                                                <Insets right="5.0" />
+                                             </HBox.margin></Label>
+                                          <TextField fx:id="txtidSpectator" prefHeight="25.0" prefWidth="171.0" />
+                                          <Button mnemonicParsing="false" onAction="#searchSpectators" stylesheets="@css/theme.css" text="Search">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Button>
+                                          <Label fx:id="timeSpectator" text="Time:">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Label>
                                        </children>
                                     </HBox>
                                  </center>
                                  <top>
-                                    <Label prefHeight="18.0" prefWidth="154.0" text="Search spectators" BorderPane.alignment="CENTER">
+                                    <Label prefHeight="19.0" prefWidth="126.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search spectators" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets right="200.0" />
+                                          <Insets top="15.0" />
                                        </BorderPane.margin>
+                                       <font>
+                                          <Font name="Lato Regular" size="12.0" />
+                                       </font>
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label text="--" BorderPane.alignment="CENTER">
+                                    <Label fx:id="spectMssg" text="--" BorderPane.alignment="CENTER">
                                        <padding>
                                           <Insets bottom="15.0" />
                                        </padding>
                                     </Label>
                                  </bottom>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets right="25.0" />
+                                 </padding>
                               </BorderPane>
-                              <BorderPane>
+                              <BorderPane prefHeight="101.0" prefWidth="315.0" styleClass="borderPane2" stylesheets="@css/theme.css">
                                  <center>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="id" />
-                                          <TextField />
-                                          <Button fx:id="ButtonSearchParticipant" mnemonicParsing="false" onAction="#searchParticipant" text="Search" />
-                                          <Label fx:id="TimeParticipant" text="Time:" />
+                                          <Label text="id">
+                                             <HBox.margin>
+                                                <Insets right="10.0" />
+                                             </HBox.margin></Label>
+                                          <TextField fx:id="txtidParticipant" prefHeight="25.0" prefWidth="172.0" />
+                                          <Button mnemonicParsing="false" onAction="#searchParticipant" stylesheets="@css/theme.css" text="Search">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Button>
+                                          <Label fx:id="timeParticipant" text="Time:">
+                                             <HBox.margin>
+                                                <Insets left="5.0" />
+                                             </HBox.margin></Label>
                                        </children>
                                     </HBox>
                                  </center>
                                  <top>
-                                    <Label prefHeight="17.0" prefWidth="108.0" text="Search participant" BorderPane.alignment="CENTER">
+                                    <Label prefHeight="19.0" prefWidth="122.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search participant" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets right="200.0" />
+                                          <Insets top="5.0" />
                                        </BorderPane.margin>
+                                       <font>
+                                          <Font name="Lato Regular" size="12.0" />
+                                       </font>
                                     </Label>
                                  </top>
+                                 <bottom>
+                                    <Label fx:id="particMssg" text="--" BorderPane.alignment="CENTER" />
+                                 </bottom>
+                                 <VBox.margin>
+                                    <Insets left="10.0" />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets right="25.0" />
+                                 </padding>
                               </BorderPane>
                            </children>
                         </VBox>
@@ -102,30 +161,114 @@
                <top>
                   <HBox alignment="CENTER" prefHeight="65.0" prefWidth="591.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="39.0" prefWidth="73.0" text="Banner">
+                        <Label alignment="CENTER" contentDisplay="CENTER" graphicTextGap="1.0" prefHeight="127.0" prefWidth="444.0" styleClass="fancytext" stylesheets="@css/theme.css" text="BANNER">
                            <font>
-                              <Font size="16.0" />
+                              <Font name="HelvLight Regular" size="40.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets right="12.0" />
+                           </HBox.margin>
                         </Label>
                      </children>
                   </HBox>
                </top>
-               <right>
-                  <BorderPane prefHeight="284.0" prefWidth="273.0" BorderPane.alignment="CENTER">
+               <center>
+                  <BorderPane fx:id="infoBorderPane" prefHeight="400.0" prefWidth="408.0" styleClass="borderPane" stylesheets="@css/theme.css" BorderPane.alignment="CENTER">
                      <top>
-                        <Label prefHeight="27.0" prefWidth="98.0" text="See Info" BorderPane.alignment="CENTER">
+                        <Label prefHeight="25.0" prefWidth="152.0" styleClass="fancytext" stylesheets="@css/theme.css" text="SEE INFO" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Impact" size="20.0" />
                            </font>
                            <BorderPane.margin>
-                              <Insets right="200.0" />
+                              <Insets left="20.0" />
                            </BorderPane.margin>
                         </Label>
                      </top>
+                     <BorderPane.margin>
+                        <Insets left="25.0" right="15.0" />
+                     </BorderPane.margin>
+                     <center>
+                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@images/avataricon.png" />
+                           </image>
+                        </ImageView>
+                     </center>
+                     <bottom>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="75.0" text="ID- Number" />
+                              <Label text="Name" GridPane.rowIndex="1" />
+                              <Label text="Last Name" GridPane.rowIndex="2" />
+                              <Label text="Email" GridPane.rowIndex="3" />
+                              <Label text="Gender" GridPane.rowIndex="4" />
+                              <Label text="Country" GridPane.rowIndex="5" />
+                              <Label text="Birthday" GridPane.rowIndex="6" />
+                           </children>
+                        </GridPane>
+                     </bottom>
                   </BorderPane>
-               </right>
+               </center>
             </BorderPane>
          </content></Tab>
-    <Tab text="Untitled Tab 2" />
+    <Tab text="Visual Structures">
+         <content>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <GridPane prefHeight="110.0" prefWidth="765.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="89.0" text="Spectators" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="15.0" left="150.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="92.0" text="Participants" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <GridPane.margin>
+                              <Insets bottom="15.0" left="150.0" />
+                           </GridPane.margin>
+                        </Button>
+                        <Label prefHeight="44.0" prefWidth="427.0" styleClass="titleText" stylesheets="@css/theme.css" text="Paint the Binary Searching Tree">
+                           <GridPane.margin>
+                              <Insets left="100.0" />
+                           </GridPane.margin>
+                        </Label>
+                        <Label prefHeight="44.0" prefWidth="427.0" styleClass="titleText" stylesheets="@css/theme.css" text="Paint the Double Linked List" GridPane.columnIndex="1">
+                           <GridPane.margin>
+                              <Insets left="100.0" />
+                           </GridPane.margin>
+                        </Label>
+                     </children>
+                  </GridPane>
+               </bottom>
+               <top>
+                  <Label styleClass="fancytext" stylesheets="@css/theme.css" text="STRUCTURES BY COUNTRY" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets top="15.0" />
+                     </BorderPane.margin>
+                  </Label>
+               </top>
+            </BorderPane>
+         </content></Tab>
   </tabs>
 </TabPane>
