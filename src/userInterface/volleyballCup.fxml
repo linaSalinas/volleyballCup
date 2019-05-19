@@ -74,7 +74,7 @@
                                              <HBox.margin>
                                                 <Insets right="5.0" />
                                              </HBox.margin></Label>
-                                          <TextField fx:id="txtidViewer" prefHeight="25.0" prefWidth="171.0" />
+                                          <TextField fx:id="txtidViewer" prefHeight="25.0" prefWidth="124.0" />
                                           <Button mnemonicParsing="false" onAction="#searchViewers" stylesheets="@css/theme.css" text="Search">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
@@ -89,7 +89,7 @@
                                  <top>
                                     <Label prefHeight="19.0" prefWidth="126.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search viewers" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets top="15.0" />
+                                          <Insets right="10.0" top="15.0" />
                                        </BorderPane.margin>
                                        <font>
                                           <Font name="Lato Regular" size="12.0" />
@@ -116,9 +116,9 @@
                                        <children>
                                           <Label text="id">
                                              <HBox.margin>
-                                                <Insets right="10.0" />
+                                                <Insets right="5.0" />
                                              </HBox.margin></Label>
-                                          <TextField fx:id="txtidParticipant" prefHeight="25.0" prefWidth="172.0" />
+                                          <TextField fx:id="txtidParticipant" prefHeight="25.0" prefWidth="123.0" />
                                           <Button mnemonicParsing="false" onAction="#searchParticipant" stylesheets="@css/theme.css" text="Search">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
@@ -133,7 +133,7 @@
                                  <top>
                                     <Label prefHeight="19.0" prefWidth="122.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search participant" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets top="5.0" />
+                                          <Insets right="10.0" top="5.0" />
                                        </BorderPane.margin>
                                        <font>
                                           <Font name="Lato Regular" size="12.0" />

@@ -5,6 +5,7 @@
 	
 	import java.io.File;
 	import java.io.IOException;
+	
 	import javafx.event.ActionEvent;
 	import javafx.fxml.FXML;
 	import javafx.fxml.FXMLLoader;
@@ -12,14 +13,16 @@
 	import javafx.scene.Scene;
 	import javafx.scene.control.Label;
 	import javafx.scene.control.TextField;
-	import javafx.scene.image.ImageView;
 	import javafx.scene.image.Image;
+	import javafx.scene.image.ImageView;
 	import javafx.scene.layout.BorderPane;
 	import javafx.scene.layout.GridPane;
 	import javafx.stage.FileChooser;
 	import javafx.stage.Stage;
 	import model.Event;
-import model.Viewer;
+	import model.Gender;
+	import model.Participant;
+	import model.Viewer;
 		
 //_________________________________________________________________________________________________________________________________________
 	/**
@@ -136,9 +139,14 @@ import model.Viewer;
 	    		dataMssg.setText("Wait while the information is being loaded");
 				this.event.loadInformation(txtData.getText());
 				dataMssg.setText("The file was succesfully Loaded!!");
+				this.event.prueba();
 			} catch (IOException ioe) {
 				loadWarningWindow();
 			}
+	    	catch(ArrayIndexOutOfBoundsException aioobe)
+	    	{
+	    		dataMssg.setText("OOPS!! looks like this is not the correct file");
+	    	}
 	    }
 	//_____________________________________________________________________________________________________________________________________
 	    @FXML
@@ -148,7 +156,21 @@ import model.Viewer;
 	     */
 	    private void searchParticipant(ActionEvent event) {
 	    	try {
-
+	    		
+	    		long beggining = System.currentTimeMillis();
+	    		Participant searched = this.event.searchForParticipant(this.event.getFirst(), new Participant(txtidParticipant.getText(), 
+	    		"P","P","P",Gender.FEMALE, "P", "P", "P"));
+	    		long end = System.currentTimeMillis();
+	    		
+	    		long time = (end-beggining);
+	    		
+	    		if(searched.getId().equals(txtidParticipant.getText())) {
+	    			particMssg.setText("We found your request!! :)");
+	    			timeParticipant.setText(timeParticipant.getText().concat(" " + time + "\nMilliseconds"));
+	    			showSearchedPInfo(searched);		
+	    		} else{
+					particMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
+	    		}
 	    	}
 	    	catch(NullPointerException npe) {
 	    		particMssg.setText("You must first Load a file" + "\nto be able to search a participant");
@@ -156,7 +178,22 @@ import model.Viewer;
 	    	catch(NumberFormatException nfe) {
 	    		particMssg.setText("You must type valid information");
 	    	}
-	    }
+	    }	    
+	//_____________________________________________________________________________________________________________________________________
+	    /**
+	     * This method allows to show off the information of the requested searched participant
+	     * @param participant the participant whose information is going to be showed in the GUI
+	     */
+	    private void showSearchedPInfo(Participant participant) {
+	    	idNumber.setText(participant.getId());
+	    	name.setText(participant.getFirstName());
+	    	lastName.setText(participant.getLastName());
+	    	email.setText(participant.getEmail());
+	    	gender.setText(""+participant.getGender());
+	    	country.setText(participant.getCountry());
+	    	birthday.setText(participant.getBirthday());
+	    	avatarImage.setImage(new Image(participant.getImageurl()));
+	    }	    
 	//_____________________________________________________________________________________________________________________________________
 	    @FXML
 	    /**
@@ -165,11 +202,17 @@ import model.Viewer;
 	     */
 	    private void searchViewers(ActionEvent event) {
 	    	try {
-	    		Viewer searched = this.event.searchForViewer(this.event.getRoot(), txtidViewer.getText());
-	    		System.out.println(searched.getId());
+	    		
+	    		long beggining = System.currentTimeMillis();
+	    		Viewer searched = this.event.searchForViewer(this.event.getRoot(), new Viewer(txtidParticipant.getText(), 
+	    	    		"P","P","P",Gender.FEMALE, "P", "P", "P"));
+	    		long end = System.currentTimeMillis();
+	    		
+	    		long time = (end-beggining);
 	    		
 	    		if(searched.getId().equals(txtidViewer.getText())) {
 	    			viewerMssg.setText("We found your request!! :)");
+	    			timeViewer.setText(timeViewer.getText().concat(" " + time + "\nMilliseconds"));
 	    			showSearchedVInfo(searched);		
 	    		} else{
 					viewerMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
