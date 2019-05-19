@@ -45,7 +45,7 @@
                                  <top>
                                     <Label alignment="TOP_LEFT" styleClass="titleText" stylesheets="@css/theme.css" text="Load data" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
-                                          <Insets top="5.0" />
+                                          <Insets right="85.0" top="5.0" />
                                        </BorderPane.margin>
                                        <font>
                                           <Font name="Lato Regular" size="12.0" />
@@ -53,9 +53,9 @@
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label fx:id="dataMssg" text="--" BorderPane.alignment="CENTER">
+                                    <Label fx:id="dataMssg" text="Please search your file and wait while is loaded" BorderPane.alignment="CENTER">
                                        <padding>
-                                          <Insets bottom="15.0" />
+                                          <Insets bottom="15.0" top="5.0" />
                                        </padding>
                                     </Label>
                                  </bottom>
@@ -74,12 +74,12 @@
                                              <HBox.margin>
                                                 <Insets right="5.0" />
                                              </HBox.margin></Label>
-                                          <TextField fx:id="txtidSpectator" prefHeight="25.0" prefWidth="171.0" />
-                                          <Button mnemonicParsing="false" onAction="#searchSpectators" stylesheets="@css/theme.css" text="Search">
+                                          <TextField fx:id="txtidViewer" prefHeight="25.0" prefWidth="171.0" />
+                                          <Button mnemonicParsing="false" onAction="#searchViewers" stylesheets="@css/theme.css" text="Search">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin></Button>
-                                          <Label fx:id="timeSpectator" text="Time:">
+                                          <Label fx:id="timeViewer" text="Time:">
                                              <HBox.margin>
                                                 <Insets left="5.0" />
                                              </HBox.margin></Label>
@@ -87,7 +87,7 @@
                                     </HBox>
                                  </center>
                                  <top>
-                                    <Label prefHeight="19.0" prefWidth="126.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search spectators" BorderPane.alignment="CENTER">
+                                    <Label prefHeight="19.0" prefWidth="126.0" styleClass="titleText" stylesheets="@css/theme.css" text="Search viewers" BorderPane.alignment="CENTER">
                                        <BorderPane.margin>
                                           <Insets top="15.0" />
                                        </BorderPane.margin>
@@ -97,9 +97,9 @@
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label fx:id="spectMssg" text="--" BorderPane.alignment="CENTER">
+                                    <Label fx:id="viewerMssg" prefHeight="32.0" prefWidth="305.0" text="Please type the id that you want to search" BorderPane.alignment="CENTER">
                                        <padding>
-                                          <Insets bottom="15.0" />
+                                          <Insets bottom="15.0" left="35.0" />
                                        </padding>
                                     </Label>
                                  </bottom>
@@ -141,7 +141,10 @@
                                     </Label>
                                  </top>
                                  <bottom>
-                                    <Label fx:id="particMssg" text="--" BorderPane.alignment="CENTER" />
+                                    <Label fx:id="particMssg" text="Please type the id that you want to search" BorderPane.alignment="CENTER">
+                                       <padding>
+                                          <Insets left="5.0" />
+                                       </padding></Label>
                                  </bottom>
                                  <VBox.margin>
                                     <Insets left="10.0" />
@@ -173,7 +176,7 @@
                   </HBox>
                </top>
                <center>
-                  <BorderPane fx:id="infoBorderPane" prefHeight="400.0" prefWidth="408.0" styleClass="borderPane" stylesheets="@css/theme.css" BorderPane.alignment="CENTER">
+                  <BorderPane prefHeight="400.0" prefWidth="408.0" styleClass="borderPane" stylesheets="@css/theme.css" BorderPane.alignment="CENTER">
                      <top>
                         <Label prefHeight="25.0" prefWidth="152.0" styleClass="fancytext" stylesheets="@css/theme.css" text="SEE INFO" BorderPane.alignment="CENTER">
                            <font>
@@ -188,14 +191,14 @@
                         <Insets left="25.0" right="15.0" />
                      </BorderPane.margin>
                      <center>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                        <ImageView fx:id="avatarImage" fitHeight="100.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
                            <image>
                               <Image url="@images/avataricon.png" />
                            </image>
                         </ImageView>
                      </center>
                      <bottom>
-                        <GridPane BorderPane.alignment="CENTER">
+                        <GridPane fx:id="descriptionGrid" BorderPane.alignment="CENTER">
                           <columnConstraints>
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -217,6 +220,41 @@
                               <Label text="Gender" GridPane.rowIndex="4" />
                               <Label text="Country" GridPane.rowIndex="5" />
                               <Label text="Birthday" GridPane.rowIndex="6" />
+                              <Label fx:id="idNumber" text="----------------" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="name" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="lastName" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="email" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="gender" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="country" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="birthday" text="----------------" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Label>
                            </children>
                         </GridPane>
                      </bottom>
@@ -226,7 +264,7 @@
          </content></Tab>
     <Tab text="Visual Structures">
          <content>
-            <BorderPane prefHeight="200.0" prefWidth="200.0">
+            <BorderPane fx:id="paintStructuresBorderPane" prefHeight="200.0" prefWidth="200.0">
                <bottom>
                   <GridPane prefHeight="110.0" prefWidth="765.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
@@ -238,12 +276,12 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="89.0" text="Spectators" GridPane.rowIndex="1">
+                        <Button mnemonicParsing="false" onAction="#paintViewers" prefHeight="37.0" prefWidth="89.0" text="Viewers" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="15.0" left="150.0" />
                            </GridPane.margin>
                         </Button>
-                        <Button mnemonicParsing="false" prefHeight="42.0" prefWidth="92.0" text="Participants" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <Button mnemonicParsing="false" onAction="#paintParticipants" prefHeight="42.0" prefWidth="92.0" text="Participants" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets bottom="15.0" left="150.0" />
                            </GridPane.margin>
