@@ -197,11 +197,9 @@
 		 */
 		public void addParticipantToLinkedList(Participant current, Participant newParticipant) {
 			if(current==null) {
-				System.out.println("first");
 				first = newParticipant;
 			}
 			else if(current.compareTo(newParticipant)>0) {
-				System.out.println("prev");
 				newParticipant.setPrev(current.getPrev());
 				current.getPrev().setNext(newParticipant);
 				current.setPrev(newParticipant);
@@ -209,10 +207,22 @@
 				
 			}
 			else if(current.compareTo(newParticipant)<0) {
-				System.out.println("next");
 				current.setNext(newParticipant);
 				newParticipant.setPrev(current);
 			}
+		}
+	//_____________________________________________________________________________________________________________________________________
+		/**
+		 * 
+		 * @param current
+		 * @param searched
+		 * @return
+		 */
+		public Participant searchForParticipant(Participant current,Participant searched) {
+			if(first!=null) {
+				return searchParticipant(current, searched);
+			}
+			return null;
 		}
 	//_____________________________________________________________________________________________________________________________________
 		/**
@@ -223,26 +233,17 @@
 		 * @param id the id that belongs to the searched participant
 		 * @return the searched participant that matched with the id that arrived as parameter
 		 */
-		public Participant searchForParticipant(Participant current,Participant searched) {
-			if(first!=null) {
-				System.out.println(current.getId());
-				System.out.println(searched.getId());
-				System.out.println();
+		private Participant searchParticipant(Participant current,Participant searched) {
 				//BASIC CASE::::::::::::::::::::::::::::::::::::::::::::
 				if(current.compareTo(searched)==0) {
-					System.out.println("lo hice");
 					return current;
 				}
 				//RECURSION CALL::::::::::::::::::::::::::::::::::::::::
 				else {
-					System.out.println(current.getId());
-					System.out.println(searched.getId());
-					System.out.println();
 					if(current.getNext()!=null) {
 						return searchForParticipant(current.getNext(), searched);
 					}
 				}			
-			}
 			return current;
 		}
 	//_____________________________________________________________________________________________________________________________________
