@@ -13,7 +13,7 @@
 	 * @author Juan José Valencia Jaramillo
 	 * @version V_01_May-2019
 	 */
-	class ViewerTest {
+	public class ViewerTest {
 		
 		private Viewer viewer;
 		private Viewer viewer2;
@@ -32,7 +32,7 @@
 		private void setUpScenary2() {
 			viewer = new Viewer("98071858804","Diego","Tafur","juandiego@outlook.es",Gender.MALE,"Paris",
 					"https://instagramuserpics.com","05/07/1998");
-			viewer2 = new Viewer("9458623514","Manuel","Reyes","reyes@correoicesi.edu.co", Gender.MALE,"EEUU",
+			viewer2 = new Viewer("94586235144","Manuel","Reyes","reyes@correoicesi.edu.co", Gender.MALE,"EEUU",
 					"https://slackgalley.com","06/10/1980");
 		}
 //_________________________________________________________________________________________________________________________________________//_________________________________________________________________________________________________________________________________________
@@ -99,5 +99,20 @@
 			assertNotNull(viewer.getLeft(),"The lefty element of this node was not set as expected");
 			
 		}
+	//_____________________________________________________________________________________________________________________________________
+		
+		@Test
+		/**
+		 * This method tests the compareTo method of the model class Viewer, making sure that the order comparing the node with 
+		 * each other is the right one for create the binary searching tree
+		 */
+		public void testCompareto() {
+			
+			setUpScenary2();
+			
+			assertTrue("The expected result of the comparatiom was not the expected one", viewer.compareTo(viewer2)>0);
+			assertTrue("The expected result of the comparation was not the expected one", viewer2.compareTo(viewer)<0);
+		}
+		
 //_________________________________________________________________________________________________________________________________________
 }

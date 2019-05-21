@@ -13,7 +13,7 @@
 	 * @author Juan José Valencia Jaramillo
 	 * @version V_01_May-2019
 	 */
-	class ParticipantTest {
+	public class ParticipantTest {
 		
 		private Participant participant;
 		private Participant participant2;
@@ -32,7 +32,7 @@
 		private void setUpScenary2() {
 			participant = new Participant("98071858804","Diego","Tafur","juandiego@outlook.es",Gender.MALE,"Paris",
 					"https://instagramuserpics.com","05/07/1998");
-			participant2 = new Participant("9458623514","Manuel","Reyes","reyes@correoicesi.edu.co", Gender.MALE,"EEUU",
+			participant2 = new Participant("94586235148","Manuel","Reyes","reyes@correoicesi.edu.co", Gender.MALE,"EEUU",
 					"https://slackgalley.com","06/10/1980");
 		}
 //_________________________________________________________________________________________________________________________________________//_________________________________________________________________________________________________________________________________________
@@ -97,6 +97,21 @@
 			
 			assertNotNull(participant.getNext(),"The next element of this node was not set as expected");
 			assertNotNull(participant2.getPrev(),"The previous element of this node was not set as expected");
+		}
+		
+	//_____________________________________________________________________________________________________________________________________
+		
+		@Test
+		/**
+		 * This method tests the compareTo method of the model class Viewer, making sure that the order comparing the node with 
+		 * each other is the right one for create the binary searching tree
+		 */
+		public void testCompareto() {
+			
+			setUpScenary2();
+			
+			assertTrue("The expected result of the comparatiom was not the expected one", participant.compareTo(participant2)>0);
+			assertTrue("The expected result of the comparation was not the expected one", participant2.compareTo(participant)<0);
 		}
 //_________________________________________________________________________________________________________________________________________
 }
