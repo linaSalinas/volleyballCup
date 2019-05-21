@@ -86,9 +86,6 @@
 
 		    @FXML
 		    private Label birthday;
-		    
-		    @FXML
-		    private GridPane descriptionGrid;
 		//______________________________________
 		
 		//VISUAL SECTION
@@ -138,7 +135,7 @@
 	    		dataMssg.setText("Wait while the information is being loaded");
 				this.event.loadInformation(txtData.getText());
 				dataMssg.setText("The file was succesfully Loaded!!");
-				this.event.prueba();
+				//this.event.prueba();
 			} catch (IOException ioe) {
 				loadWarningWindow();
 			}
@@ -219,6 +216,7 @@
 	    	}
 	    	catch(NullPointerException npe) {
 	    		viewerMssg.setText("You must first Load a file" + "\nto be able to search a participant");
+	    		npe.printStackTrace();
 	    	}
 	    	catch(NumberFormatException nfe) {
 	    		viewerMssg.setText("You must type valid information");

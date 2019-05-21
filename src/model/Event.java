@@ -88,8 +88,8 @@
 						addViewerToBST(this.root, maleViewer);
 						//LINKED LIST::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 						Participant maleParticipant = new Participant(maleViewer.getId(),maleViewer.getFirstName(),
-									maleViewer.getLastName(),maleViewer.getEmail(),maleViewer.getGender(),
-									maleViewer.getCountry(),maleViewer.getImageurl(),maleViewer.getBirthday());
+						maleViewer.getLastName(),maleViewer.getEmail(),maleViewer.getGender(),
+						maleViewer.getCountry(),maleViewer.getImageurl(),maleViewer.getBirthday());
 						generateParticipants(pos,temp, maleParticipant);
 						temp = maleParticipant;
 						//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -100,8 +100,8 @@
 						addViewerToBST(this.root, femaleViewer);
 						//LINKED LIST::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 						Participant femaleParticipant = new Participant(femaleViewer.getId(),femaleViewer.getFirstName(),
-									femaleViewer.getLastName(),femaleViewer.getEmail(),femaleViewer.getGender(),
-									femaleViewer.getCountry(),femaleViewer.getImageurl(),femaleViewer.getBirthday());
+						femaleViewer.getLastName(),femaleViewer.getEmail(),femaleViewer.getGender(),
+						femaleViewer.getCountry(),femaleViewer.getImageurl(),femaleViewer.getBirthday());
 						generateParticipants(pos,temp,femaleParticipant);
 						temp = femaleParticipant;
 						//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
@@ -121,10 +121,12 @@
 		 */
 		public void addViewerToBST(Viewer current, Viewer newViewer) {
 			if(current==null) {
+				System.out.println("Raiz");
 				this.root = newViewer;
 			}
 			else {
 				if(current.compareTo(newViewer)>0) {
+					System.out.println("menor");
 					if(current.getLeft()==null) {
 						current.setLeft(newViewer);
 					}
@@ -134,6 +136,7 @@
 				}
 				else {
 					if(current.compareTo(newViewer)<0) {
+						System.out.println("mayor");
 						if(current.getRight()==null) {
 							current.setRight(newViewer);
 						}
@@ -201,7 +204,9 @@
 			}
 			else if(current.compareTo(newParticipant)>0) {
 				newParticipant.setPrev(current.getPrev());
+			if(current.getPrev()!=null){
 				current.getPrev().setNext(newParticipant);
+			}	
 				current.setPrev(newParticipant);
 				newParticipant.setNext(current);
 				
@@ -213,10 +218,11 @@
 		}
 	//_____________________________________________________________________________________________________________________________________
 		/**
-		 * 
-		 * @param current
-		 * @param searched
-		 * @return
+		 * This method calls the searching method of a participant making sure that only it can be call
+		 * if the linked list are previously created
+		 * @param current the current element where the searching is going to start
+		 * @param searched the element that it needs to be search and return
+		 * @return null in the case that the linked list remains empty
 		 */
 		public Participant searchForParticipant(Participant current,Participant searched) {
 			if(first!=null) {
@@ -246,7 +252,6 @@
 				}			
 			return current;
 		}
-	//_____________________________________________________________________________________________________________________________________
 	//_____________________________________________________________________________________________________________________________________
 		
 		public void prueba() {
