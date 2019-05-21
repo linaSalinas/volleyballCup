@@ -16,7 +16,7 @@
 		
 		private Participant first;
 		private Viewer root;
-//_________________________________________________________________________________________________________________________________________
+	//_________________________________________________________________________________________________________________________________________
 		/**
 		 * <b>Event Constructor</b>
 		 * This method allows to create an event so its functions can be used.<br>
@@ -81,71 +81,68 @@
 					String imageurl = parts[6];
 					String birthday = parts[7];
 					
-					//determinates the gender of the assistant
-					if(gender.equals("Male")) {
-						//BINARY SEARCHING TREE:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-						Viewer maleViewer = new Viewer (id,firstName,lastName,email,Gender.MALE,country,imageurl,birthday);
-						addViewerToBST(this.root, maleViewer);
-						//LINKED LIST::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-						Participant maleParticipant = new Participant(maleViewer.getId(),maleViewer.getFirstName(),
-						maleViewer.getLastName(),maleViewer.getEmail(),maleViewer.getGender(),
-						maleViewer.getCountry(),maleViewer.getImageurl(),maleViewer.getBirthday());
-						generateParticipants(pos,temp, maleParticipant);
-						temp = maleParticipant;
-						//::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-					}
-					else {
-						//BINARY SEARCHING TREE:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-						Viewer femaleViewer = new Viewer (id,firstName,lastName,email,Gender.FEMALE,country,imageurl,birthday);
-						addViewerToBST(this.root, femaleViewer);
-						//LINKED LIST::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-						Participant femaleParticipant = new Participant(femaleViewer.getId(),femaleViewer.getFirstName(),
-						femaleViewer.getLastName(),femaleViewer.getEmail(),femaleViewer.getGender(),
-						femaleViewer.getCountry(),femaleViewer.getImageurl(),femaleViewer.getBirthday());
-						generateParticipants(pos,temp,femaleParticipant);
-						temp = femaleParticipant;
-						//:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-					}
+					Gender g = gender.equals("Male")?Gender.MALE:Gender.FEMALE;
+					addViewerToBST(id,firstName,lastName,email,g,country,imageurl,birthday);
+					Participant p = new Participant(id,firstName,lastName,email,g,country,imageurl,birthday);
+					generateParticipants(pos,temp, p);
+					temp = p;
 				}
 				line = br.readLine();
 			}
 			br.close();
 		}
+		
+		
+	//______________________________________________________________________________________________________________________________________
+
+		public void addViewerToBST(String id, String firstName, String lastName, String email, Gender gender, String country,
+				String imageurl, String birthday) {
+			Viewer v = new Viewer (id,firstName,lastName,email,Gender.MALE,country,imageurl,birthday);
+			if(root==null) {
+				root = v;
+			}else {
+				addViewerToBST(root, v);
+			}
+		}
 	//_____________________________________________________________________________________________________________________________________
 		/**
 		 * This method adds a node to the viewers' binary searching tree using recursion.
-		 * <b>Pre:</b> the Event exists.<br>
 		 * <b>Pos:</b> the viewer was added with the right criteria inside the BST.<br>
-		 * @param root the current node where the recursive function is going to keep looking for an empty tree.
+		 * @param current the current node where the recursive function is going to keep looking for an empty tree. current!=null 
 		 * @param newViewer the viewer that is going to be added.
 		 */
-		public void addViewerToBST(Viewer current, Viewer newViewer) {
-			if(current==null) {
-				System.out.println("Raiz");
-				this.root = newViewer;
-			}
-			else {
-				if(current.compareTo(newViewer)>0) {
-					System.out.println("menor");
-					if(current.getLeft()==null) {
-						current.setLeft(newViewer);
-					}
-					else {
-						addViewerToBST(current.getLeft(), newViewer);
-					}
+		private void addViewerToBST(Viewer current, Viewer newViewer) {
+			if(current.compareTo(newViewer)>0) {
+				System.out.println("menor");
+				if(current.getLeft()==null) {
+					current.setLeft(newViewer);
 				}
 				else {
-					if(current.compareTo(newViewer)<0) {
-						System.out.println("mayor");
-						if(current.getRight()==null) {
-							current.setRight(newViewer);
-						}
-						else {
-							addViewerToBST(current.getRight(), newViewer);
-						}
+					addViewerToBST(current.getLeft(), newViewer);
+				}
+			}
+			else {
+				if(current.compareTo(newViewer)<0) {
+					System.out.println("mayor");
+					if(current.getRight()==null) {
+						current.setRight(newViewer);
+					}
+					else {
+						addViewerToBST(current.getRight(), newViewer);
 					}
 				}
 			}
+		}
+		
+	//______________________________________________________________________________________________________________________________________
+		/**
+		 * This method calls the searching method of a viewer making sure that only it can be call
+		 * if the binary searching tree are previously created
+		 * @param id the id that its desired to be search
+		 * @return the call of the recursive method that searchs the viewer requested
+		 */
+		public Viewer searchForViewer(String id) {
+			return searchForViewer(root, id);
 		}
 	//_____________________________________________________________________________________________________________________________________
 		/**
@@ -156,22 +153,19 @@
 		 * @param id the id that belongs to the searched viewer
 		 * @return the searched viewer that matched with the id that arrived as parameter
 		 */
-		public Viewer searchForViewer(Viewer current,Viewer searched) {
-			if(root!=null) {
-				//BASIC CASE::::::::::::::::::::::::::::::::::::::::::::
-				if(current.compareTo(searched)==0) {
-					return current;
-				}
+		private Viewer searchForViewer(Viewer current,String searched) {
+			System.out.println("Current: "+current);
+			if(current!=null) {
 				//RECURSION CALL::::::::::::::::::::::::::::::::::::::::
-				else {
-					if(current.compareTo(searched)>0) {
-						return searchForViewer(current.getLeft(), searched);
-					}
-					else if(current.compareTo(searched)<0) {
-						return searchForViewer(current.getRight(), searched);
-					}
+				if(current.getId().compareTo(searched)>0) {
+					return searchForViewer(current.getLeft(), searched);
+				}
+				else if(current.getId().compareTo(searched)<0) {
+					return searchForViewer(current.getRight(), searched);
 				}
 			}
+			//BASIC CASE::::::::::::::::::::::::::::::::::::::::::::
+			System.out.println("Retornando: "+current);
 			return current;
 		}	
 	//_____________________________________________________________________________________________________________________________________
@@ -245,24 +239,11 @@
 					return current;
 				}
 				//RECURSION CALL::::::::::::::::::::::::::::::::::::::::
-				else {
-					if(current.getNext()!=null) {
+				else if(current.getNext()!=null) {
 						return searchForParticipant(current.getNext(), searched);
-					}
-				}			
-			return current;
-		}
-	//_____________________________________________________________________________________________________________________________________
-		
-		public void prueba() {
-			Participant current = first;
-			int i=0;
-			while(current.getNext()!=null) {
-				System.out.println(current.getId());
-				System.out.println(i);
-				current = current.getNext();
-				i++;
-			}
+				}else {
+					return null;
+				}
 		}
 //_________________________________________________________________________________________________________________________________________
 }

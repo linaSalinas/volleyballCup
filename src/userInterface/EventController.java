@@ -200,11 +200,11 @@
 	    	try {
 	    		
 	    		long beggining = System.currentTimeMillis();
-	    		Viewer searched = this.event.searchForViewer(this.event.getRoot(), new Viewer(txtidParticipant.getText(), 
-	    	    		"P","P","P",Gender.FEMALE, "P", "P", "P"));
+	    		Viewer searched = this.event.searchForViewer(txtidViewer.getText());
 	    		long end = System.currentTimeMillis();
 	    		
 	    		long time = (end-beggining);
+	    		System.out.println(time);
 	    		
 	    		if(searched.getId().equals(txtidViewer.getText())) {
 	    			viewerMssg.setText("We found your request!! :)");
