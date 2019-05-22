@@ -63,6 +63,7 @@
 		
 			Random random = new Random();
 			int pos = random.nextInt(2);
+			int i = 0;
 			
 			Participant temp = first;
 					
@@ -84,17 +85,27 @@
 					Gender g = gender.equals("Male")?Gender.MALE:Gender.FEMALE;
 					addViewerToBST(id,firstName,lastName,email,g,country,imageurl,birthday);
 					Participant p = new Participant(id,firstName,lastName,email,g,country,imageurl,birthday);
-					generateParticipants(pos,temp, p);
+					addParticipantToLinkedList(id,firstName,lastName,email,g,country,imageurl,birthday,pos);
 					temp = p;
 				}
 				line = br.readLine();
+				i++;
 			}
 			br.close();
 		}
-		
-		
 	//______________________________________________________________________________________________________________________________________
-
+		
+		/**
+		 * This method adds a viewer to the binary searching tree creating a new Node with the paramaters that arrived
+		 * @param id the unique number that identifies the viewer
+		 * @param firstName the name of the viewer
+		 * @param lastName the last name of the viewer
+		 * @param email the contact direction of the viewer
+		 * @param gender the biological sex of the viewer
+		 * @param country the origin place where the viewer came from
+		 * @param imageurl the direction related with the visual representation of the viewer
+		 * @param birthday the date of birthday
+		 */
 		public void addViewerToBST(String id, String firstName, String lastName, String email, Gender gender, String country,
 				String imageurl, String birthday) {
 			Viewer v = new Viewer (id,firstName,lastName,email,Gender.MALE,country,imageurl,birthday);
@@ -113,7 +124,6 @@
 		 */
 		private void addViewerToBST(Viewer current, Viewer newViewer) {
 			if(current.compareTo(newViewer)>0) {
-				System.out.println("menor");
 				if(current.getLeft()==null) {
 					current.setLeft(newViewer);
 				}
@@ -123,7 +133,6 @@
 			}
 			else {
 				if(current.compareTo(newViewer)<0) {
-					System.out.println("mayor");
 					if(current.getRight()==null) {
 						current.setRight(newViewer);
 					}
@@ -133,7 +142,6 @@
 				}
 			}
 		}
-		
 	//______________________________________________________________________________________________________________________________________
 		/**
 		 * This method calls the searching method of a viewer making sure that only it can be call
@@ -154,7 +162,6 @@
 		 * @return the searched viewer that matched with the id that arrived as parameter
 		 */
 		private Viewer searchForViewer(Viewer current,String searched) {
-			System.out.println("Current: "+current);
 			if(current!=null) {
 				//RECURSION CALL::::::::::::::::::::::::::::::::::::::::
 				if(current.getId().compareTo(searched)>0) {
@@ -165,24 +172,30 @@
 				}
 			}
 			//BASIC CASE::::::::::::::::::::::::::::::::::::::::::::
-			System.out.println("Retornando: "+current);
 			return current;
 		}	
 	//_____________________________________________________________________________________________________________________________________
 		/**
-		 * This method determinates when it should be a new participant added to the linked list by determinating if 
-		 * the line was odd or not
-		 * <b>Pos:</b> The call to the adding method was correct.
-		 * @param pos the determinant number that considered when the method should be call
-		 * @param lastAdded the last element that was added to the structure
-		 * @param newParticipant the new element that is going to make part of the linked list
+		 * This method adds a viewer to the double linked list creating a new Node with the paramaters that arrived
+		 * @param id the unique number that identifies the participant
+		 * @param firstName the name of the participant
+		 * @param lastName the last name of the participant
+		 * @param email the contact direction of the participant
+		 * @param gender the biological sex of the participant
+		 * @param country the origin place where the participant came from
+		 * @param imageurl the direction related with the visual representation of the participant
+		 * @param birthday the date of birthday 
 		 */
-		public void generateParticipants(int pos,Participant lastAdded, Participant newParticipant) {
-			if(pos==0) {
-				addParticipantToLinkedList(lastAdded, newParticipant);
+		public void addParticipantToLinkedList(String id, String firstName, String lastName, String email, Gender gender, String country,
+			String imageurl, String birthday,int random) {
+			Participant p = new Participant(id,firstName,lastName,email,gender,country,imageurl,birthday);
+			if(first==null) {
+				first = p;
 			}
-			else if(pos==1) {
-				addParticipantToLinkedList(lastAdded, newParticipant);
+			else {
+				if(random==0) {
+				addParticipantToLinkedList(first, p);
+				}
 			}
 		}
 	//_____________________________________________________________________________________________________________________________________
@@ -192,18 +205,14 @@
 		 * <b>Pos:</b> the participant was added with the right criteria inside the Double linked list.<br>
 		 * @param participant the participant that is going to be added.
 		 */
-		public void addParticipantToLinkedList(Participant current, Participant newParticipant) {
-			if(current==null) {
-				first = newParticipant;
-			}
-			else if(current.compareTo(newParticipant)>0) {
+		private void addParticipantToLinkedList(Participant current, Participant newParticipant) {
+			if(current.compareTo(newParticipant)>0) {
 				newParticipant.setPrev(current.getPrev());
-			if(current.getPrev()!=null){
+				if(current.getPrev()!=null){
 				current.getPrev().setNext(newParticipant);
-			}	
+				}	
 				current.setPrev(newParticipant);
-				newParticipant.setNext(current);
-				
+				newParticipant.setNext(current);	
 			}
 			else if(current.compareTo(newParticipant)<0) {
 				current.setNext(newParticipant);
@@ -218,11 +227,8 @@
 		 * @param searched the element that it needs to be search and return
 		 * @return null in the case that the linked list remains empty
 		 */
-		public Participant searchForParticipant(Participant current,Participant searched) {
-			if(first!=null) {
-				return searchParticipant(current, searched);
-			}
-			return null;
+		public Participant searchForParticipant(String id) {
+			return searchForParticipant(first, id);
 		}
 	//_____________________________________________________________________________________________________________________________________
 		/**
@@ -233,14 +239,14 @@
 		 * @param id the id that belongs to the searched participant
 		 * @return the searched participant that matched with the id that arrived as parameter
 		 */
-		private Participant searchParticipant(Participant current,Participant searched) {
+		private Participant searchForParticipant(Participant current, String id) {
 				//BASIC CASE::::::::::::::::::::::::::::::::::::::::::::
-				if(current.compareTo(searched)==0) {
+				if(current.getId().compareTo(id)==0) {
 					return current;
 				}
 				//RECURSION CALL::::::::::::::::::::::::::::::::::::::::
 				else if(current.getNext()!=null) {
-						return searchForParticipant(current.getNext(), searched);
+						return searchForParticipant(current.getNext(), id);
 				}else {
 					return null;
 				}

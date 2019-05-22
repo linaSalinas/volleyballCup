@@ -2,7 +2,6 @@
 
 	package userInterface;
 //_________________________________________________________________________________________________________________________________________
-	
 	import java.io.File;
 	import java.io.IOException;
 	import javafx.event.ActionEvent;
@@ -12,6 +11,8 @@
 	import javafx.scene.Scene;
 	import javafx.scene.control.Label;
 	import javafx.scene.control.TextField;
+	import javafx.scene.control.Button;
+	import javafx.scene.control.ScrollPane;
 	import javafx.scene.image.Image;
 	import javafx.scene.image.ImageView;
 	import javafx.scene.layout.BorderPane;
@@ -22,7 +23,6 @@
 	import model.Gender;
 	import model.Participant;
 	import model.Viewer;
-		
 //_________________________________________________________________________________________________________________________________________
 	/**
 	 * This class manage the necessary attributes and methods to design and control the events inside the userinterface.
@@ -38,6 +38,9 @@
 	
 			@FXML
 			private Label dataMssg;
+		
+		    @FXML
+		    private Button loadButton;
 		//______________________________________
 		
 		//SEARCH SPECTATOR SECTION
@@ -91,6 +94,9 @@
 		//VISUAL SECTION
 		    @FXML
 		    private BorderPane paintStructuresBorderPane;
+		    
+		    @FXML
+		    private ScrollPane scrollSurface;
 	    //________________________________________________
 		    
 		    private Stage stage;
@@ -132,11 +138,12 @@
 	    private void load(ActionEvent event) throws IOException {
 	    	try {
 	    		this.event = new Event();
+	    		this.event.loadInformation(txtData.getText());
+	    		loadButton.setDisable(true);
 	    		dataMssg.setText("Wait while the information is being loaded");
-				this.event.loadInformation(txtData.getText());
 				dataMssg.setText("The file was succesfully Loaded!!");
-				//this.event.prueba();
-			} catch (IOException ioe) {
+				loadButton.setDisable(false);
+	    	} catch (IOException ioe) {
 				loadWarningWindow();
 			}
 	    	catch(ArrayIndexOutOfBoundsException aioobe)
@@ -154,20 +161,26 @@
 	    	try {
 	    		
 	    		long beggining = System.currentTimeMillis();
-	    		Participant searched = this.event.searchForParticipant(this.event.getFirst(), new Participant(txtidParticipant.getText(), 
-	    		"P","P","P",Gender.FEMALE, "P", "P", "P"));
+	    		Participant searched = this.event.searchForParticipant(txtidParticipant.getText());
 	    		long end = System.currentTimeMillis();
 	    		
 	    		long time = (end-beggining);
 	    		
-	    		if(searched.getId().equals(txtidParticipant.getText())) {
-	    			particMssg.setText("We found your request!! :)");
-	    			timeParticipant.setText(timeParticipant.getText().concat(" " + time + "\nMilliseconds"));
-	    			showSearchedPInfo(searched);		
-	    		} else{
+	    		if(searched!=null) {
+		    		if(searched.getId().equals(txtidParticipant.getText())) {
+		    			particMssg.setText("We found your request!! :)");
+		    			timeParticipant.setText(timeParticipant.getText().concat(" " + time + "\nMilliseconds"));
+		    			showSearchedPInfo(searched);		
+		    		}
+		    		else {
+		    			particMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
+		    		}
+	    		}
+	    		else{
 					particMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
 	    		}
 	    	}
+	    	//if the user tries to search for a participant without previously loaded a file
 	    	catch(NullPointerException npe) {
 	    		particMssg.setText("You must first Load a file" + "\nto be able to search a participant");
 	    	}
@@ -197,26 +210,30 @@
 	     * @param event the event triggered by the user
 	     */
 	    private void searchViewers(ActionEvent event) {
-	    	try {
-	    		
+	    	try {		
 	    		long beggining = System.currentTimeMillis();
 	    		Viewer searched = this.event.searchForViewer(txtidViewer.getText());
 	    		long end = System.currentTimeMillis();
 	    		
 	    		long time = (end-beggining);
-	    		System.out.println(time);
 	    		
-	    		if(searched.getId().equals(txtidViewer.getText())) {
-	    			viewerMssg.setText("We found your request!! :)");
-	    			timeViewer.setText(timeViewer.getText().concat(" " + time + "\nMilliseconds"));
-	    			showSearchedVInfo(searched);		
-	    		} else{
+	    		if(searched!=null) {
+		    		if(searched.getId().equals(txtidViewer.getText())) {
+		    			viewerMssg.setText("We found your request!! :)");
+		    			timeViewer.setText(timeViewer.getText().concat(" " + time + "\nMilliseconds"));
+		    			showSearchedVInfo(searched);		
+		    		}
+		    		else {
+		    			viewerMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
+		    		}
+	    		}
+	    		else{
 					viewerMssg.setText("We couldn't find your request, sorry :(" + "\nTry with another id");
 	    		}
 	    	}
+	    	//if the user tries to search for a viewer without previously loaded a file
 	    	catch(NullPointerException npe) {
 	    		viewerMssg.setText("You must first Load a file" + "\nto be able to search a participant");
-	    		npe.printStackTrace();
 	    	}
 	    	catch(NumberFormatException nfe) {
 	    		viewerMssg.setText("You must type valid information");

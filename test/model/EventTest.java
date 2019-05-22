@@ -1,8 +1,9 @@
 //_________________________________________________________________________________________________________________________________________
 	package model;
+//_________________________________________________________________________________________________________________________________________
 	import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+	import static org.junit.Assert.assertNull;
+	import static org.junit.Assert.assertTrue;
 //_________________________________________________________________________________________________________________________________________
 	import static org.junit.jupiter.api.Assertions.*;
 	import java.io.IOException;
@@ -18,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 
 		private Event event;
 		
-		private Viewer viewer;
+		private Viewer root;
 		private Viewer left;
 		private Viewer rigth;
 		
@@ -48,7 +49,7 @@ import static org.junit.Assert.assertTrue;
 			
 			event = new Event();
 			
-			viewer = new Viewer("66784129", "Juan","Valencia","Juanchouni@hotmail.com",Gender.MALE,"Colombia",
+			root = new Viewer("66784129", "Juan","Valencia","Juanchouni@hotmail.com",Gender.MALE,"Colombia",
 					"https://image.com","13/03/2002");
 			left = new Viewer("225894120", "Lina","Salinas", "linasalinasd7@gmail.com",Gender.FEMALE, "Japón",
 					"https://facebookprofilegetImage.com", "28/04/1999");
@@ -66,7 +67,7 @@ import static org.junit.Assert.assertTrue;
 			participant = new Participant("66784129", "Juan","Valencia","Juanchouni@hotmail.com",Gender.MALE,"Colombia",
 					"https://image.com","13/03/2002");
 			prev = new Participant("225894120", "Lina","Salinas", "linasalinasd7@gmail.com",Gender.FEMALE, "Japón",
-					"https://facebookprofilegetImage.com", "28/04/1999");
+					"https://facebookprofilegetImage.com", "31/05/1999");
 			next = new Participant("94586235148","Manuel","Reyes","reyes@correoicesi.edu.co", Gender.MALE,"EEUU",
 					"https://slackgalley.com","06/10/1980");
 		}
@@ -123,21 +124,25 @@ import static org.junit.Assert.assertTrue;
 			setUpScenary3();
 			
 			assertNull("The root of the tree is already ocupied", event.getRoot());
-			assertNull("This node already has an element in the left", viewer.getLeft());
-			assertNull("This node already has an element in the right", viewer.getRight());
+			assertNull("This node already has an element in the left", root.getLeft());
+			assertNull("This node already has an element in the right", root.getRight());
 			
-			/**event.addViewerToBST(event.getRoot(), viewer);
-			event.addViewerToBST(viewer, left);
-			event.addViewerToBST(viewer, rigth);
+			event.addViewerToBST(root.getId(), root.getFirstName(), root.getLastName(), root.getEmail(), 
+			root.getGender(),root.getCountry(), root.getImageurl(), root.getBirthday());
 			
+			event.addViewerToBST(left.getId(), left.getFirstName(), left.getLastName(), left.getEmail(), 
+			left.getGender(),left.getCountry(), left.getImageurl(), left.getBirthday());
+			
+			event.addParticipantToLinkedList(rigth.getId(), rigth.getFirstName(), rigth.getLastName(), rigth.getEmail(), 
+			rigth.getGender(),rigth.getCountry(), rigth.getImageurl(), rigth.getBirthday());
+					
 			assertNotNull(event.getRoot(), "The root node for this binary searching tree is null. it was not added as expected");
-			assertNotNull(viewer.getLeft(), "The lefty node for this viewer is null. it was not added as expected");
-			assertNotNull(viewer.getRight(), "The righty node for this viewer is null. it was not added as expected");
+			assertNotNull(root.getLeft(), "The lefty node for this viewer is null. it was not added as expected");
+			assertNotNull(root.getRight(), "The righty node for this viewer is null. it was not added as expected");
 			
 			
-			assertTrue("The viewer node is not bigger than the lefty one", viewer.compareTo(left)>0);
-			assertTrue("The viewer node is not smaller than the righty one", viewer.compareTo(rigth)<0);
-			*/
+			assertTrue("The viewer node is not bigger than the lefty one", root.compareTo(left)>0);
+			assertTrue("The viewer node is not smaller than the righty one", root.compareTo(rigth)<0);
 		}
 	//_____________________________________________________________________________________________________________________________________
 		@Test
@@ -149,20 +154,24 @@ import static org.junit.Assert.assertTrue;
 			
 			setUpScenary3();
 			
-			/**event.addViewerToBST(event.getRoot(), viewer);
-			event.addViewerToBST(viewer, left);
-			event.addViewerToBST(viewer, rigth);
-
-			Viewer searched = event.searchForViewer(viewer,new Viewer("225894120","Test","Test","Test",Gender.MALE,"Test","Test","Test"));
+			event.addViewerToBST(root.getId(), root.getFirstName(), root.getLastName(), root.getEmail(), 
+			root.getGender(),root.getCountry(), root.getImageurl(), root.getBirthday());
 			
+			event.addViewerToBST(left.getId(), left.getFirstName(), left.getLastName(), left.getEmail(), 
+			left.getGender(),left.getCountry(), left.getImageurl(), left.getBirthday());
+			
+			event.addViewerToBST(rigth.getId(), rigth.getFirstName(), rigth.getLastName(), rigth.getEmail(), 
+			rigth.getGender(),rigth.getCountry(), rigth.getImageurl(), rigth.getBirthday()); 
+			 
+			 
+			Viewer searched = event.searchForViewer("225894120");
 			assertNotNull("The searched node was null as not expected", searched);
 			assertTrue("The id is not the one that was searched", "225894120".equals(searched.getId()));
 			
-			searched = event.searchForViewer(viewer, new Viewer("94586235148","Test","Test","Test",Gender.FEMALE,"Test","Test","Test"));
+			searched = event.searchForViewer("94586235148");
 			
 			assertNotNull("The searched node was null as not expected", searched);
 			assertTrue("The id is not the one that was searched", "94586235148".equals(searched.getId()));
-			*/
 		}
 	//_____________________________________________________________________________________________________________________________________
 		@Test
@@ -179,9 +188,14 @@ import static org.junit.Assert.assertTrue;
 			assertNull("This node already has an element before it", participant.getPrev());
 			assertNull("This node already has an element after it", participant.getNext());
 			
-			event.addParticipantToLinkedList(event.getFirst(), participant);
-			event.addParticipantToLinkedList(participant, prev);
-			event.addParticipantToLinkedList(participant, next);
+			event.addParticipantToLinkedList(participant.getId(), participant.getFirstName(), participant.getLastName(), participant.getEmail(), 
+			participant.getGender(),participant.getCountry(), participant.getImageurl(), participant.getBirthday());
+			
+			event.addParticipantToLinkedList(prev.getId(), prev.getFirstName(), prev.getLastName(), prev.getEmail(), 
+			prev.getGender(),prev.getCountry(), prev.getImageurl(), prev.getBirthday());
+			
+			event.addParticipantToLinkedList(next.getId(), next.getFirstName(), next.getLastName(), next.getEmail(), 
+			next.getGender(),next.getCountry(), next.getImageurl(), next.getBirthday()); 
 			
 			assertNotNull(event.getFirst(), "The first node for this double linked list is null. it was not added as expected");
 			assertNotNull(participant.getPrev(), "The previous node for this participant is null. it was not added as expected");
@@ -200,18 +214,21 @@ import static org.junit.Assert.assertTrue;
 			
 			setUpScenary4();
 			
-			event.addParticipantToLinkedList(event.getFirst(), participant);
-			event.addParticipantToLinkedList(participant, prev);
-			event.addParticipantToLinkedList(participant, next);
+			event.addParticipantToLinkedList(participant.getId(), participant.getFirstName(), participant.getLastName(), participant.getEmail(), 
+			participant.getGender(),participant.getCountry(), participant.getImageurl(), participant.getBirthday());
 			
-			Participant searched = event.searchForParticipant(participant,new Participant("94586235148","Test",
-			"Test","Test",Gender.FEMALE,"Test","Test","Test"));
+			event.addParticipantToLinkedList(prev.getId(), prev.getFirstName(), prev.getLastName(), prev.getEmail(), 
+			prev.getGender(),prev.getCountry(), prev.getImageurl(), prev.getBirthday());
+			
+			event.addParticipantToLinkedList(next.getId(), next.getFirstName(), next.getLastName(), next.getEmail(), 
+			next.getGender(),next.getCountry(), next.getImageurl(), next.getBirthday()); 
+				
+			Participant searched = event.searchForParticipant("94586235148");
 	
 			assertNotNull("The searched node was null as not expected", searched);
 			assertTrue("The id is not the one that was searched", "94586235148".equals(searched.getId()));
 			
-			searched = event.searchForParticipant(participant.getPrev(), new Participant("225894120","Test","Test",
-			"Test",Gender.FEMALE,"Test","Test","Test"));
+			searched = event.searchForParticipant("225894120");
 			
 			assertNotNull("The searched node was null as not expected", searched);
 			assertTrue("The id is not the one that was searched", "225894120".equals(searched.getId()));	
