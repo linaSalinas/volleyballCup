@@ -262,7 +262,7 @@
 	     * @param event the event triggered by the user.
 	     */
 	    private void paintParticipants(ActionEvent event) {
-
+	    	
 	    }
 	//_____________________________________________________________________________________________________________________________________
 	    @FXML

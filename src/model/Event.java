@@ -62,7 +62,6 @@
 			String line = br.readLine();
 		
 			Random random = new Random();
-			int pos = random.nextInt(2);
 			int i = 0;
 			
 			Participant temp = first;
@@ -71,6 +70,7 @@
 				if(!line.startsWith("#")) {
 					
 					String[] parts = line.split(",");
+					int pos = random.nextInt(2);
 					
 					//Creates the respective attributes from every line
 					String id = parts[0];
@@ -85,7 +85,9 @@
 					Gender g = gender.equals("Male")?Gender.MALE:Gender.FEMALE;
 					addViewerToBST(id,firstName,lastName,email,g,country,imageurl,birthday);
 					Participant p = new Participant(id,firstName,lastName,email,g,country,imageurl,birthday);
-					addParticipantToLinkedList(id,firstName,lastName,email,g,country,imageurl,birthday,pos);
+					if(pos==0) {
+						addParticipantToLinkedList(id,firstName,lastName,email,g,country,imageurl,birthday);
+					}
 					temp = p;
 				}
 				line = br.readLine();
@@ -187,15 +189,13 @@
 		 * @param birthday the date of birthday 
 		 */
 		public void addParticipantToLinkedList(String id, String firstName, String lastName, String email, Gender gender, String country,
-			String imageurl, String birthday,int random) {
+			String imageurl, String birthday) {
 			Participant p = new Participant(id,firstName,lastName,email,gender,country,imageurl,birthday);
 			if(first==null) {
 				first = p;
 			}
 			else {
-				if(random==0) {
 				addParticipantToLinkedList(first, p);
-				}
 			}
 		}
 	//_____________________________________________________________________________________________________________________________________
