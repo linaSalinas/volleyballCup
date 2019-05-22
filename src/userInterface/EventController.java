@@ -13,10 +13,12 @@
 	import javafx.scene.control.TextField;
 	import javafx.scene.control.Button;
 	import javafx.scene.control.ScrollPane;
+	import javafx.scene.layout.Pane;
 	import javafx.scene.image.Image;
 	import javafx.scene.image.ImageView;
 	import javafx.scene.layout.BorderPane;
 	import javafx.scene.layout.GridPane;
+	import javafx.scene.shape.Line;
 	import javafx.stage.FileChooser;
 	import javafx.stage.Stage;
 	import model.Event;
@@ -144,7 +146,7 @@
 				dataMssg.setText("The file was succesfully Loaded!!");
 				loadButton.setDisable(false);
 	    	} catch (IOException ioe) {
-				loadWarningWindow();
+				loadIOWarningWindow();
 			}
 	    	catch(ArrayIndexOutOfBoundsException aioobe)
 	    	{
@@ -261,7 +263,45 @@
 	     * inside the event.<br>
 	     * @param event the event triggered by the user.
 	     */
-	    private void paintParticipants(ActionEvent event) {
+	    private void paintParticipants(ActionEvent event) throws IOException {
+	    	try {
+		    	Participant current = this.event.getFirst();
+		    	Pane content = new Pane();
+		    	int i=0;
+		    	
+		    	while(current.getNext()!=null) {
+		    		
+		    		Image Avatar = new Image(current.getImageurl());
+		    		Label id = new Label(current.getId());
+		    		Label name = new Label(current.getFirstName());
+		    		
+		    		Line prev = new Line(100.0,-50.0,100.0,0.0);
+		    		Line Next = new Line(100.0,-50.0,100.0,0.0);
+		    		
+		    		content.getChildren().add(i, id);
+		    		content.getChildren().add(i, name);
+		    		content.getChildren().add(i, prev);
+		    		content.getChildren().add(i, Next);
+		    		
+	
+		    		current = current.getNext();
+		    		i++;
+		    	}
+	    	}
+	    	catch(NullPointerException npe) {
+	    		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("WarningWindow.fxml"));
+		    	Parent root1 = (Parent) fxmlLoader.load();
+		    	Stage stage = new Stage();
+		    	stage.setTitle("Warning Suggestions");
+		    	stage.centerOnScreen();
+		    	stage.setResizable(false);
+		    	
+		    	Image image = new Image ("userInterface/images/warningicon.png");
+				stage.getIcons().add(image);
+				
+		    	stage.setScene(new Scene(root1));  
+		    	stage.show();
+	    	}
 	    	
 	    }
 	//_____________________________________________________________________________________________________________________________________
@@ -272,8 +312,7 @@
 	     * @param event the event triggered by the user.
 	     */
 	    private void paintViewers(ActionEvent event) {
-
-
+	    
 	    }
 	//_____________________________________________________________________________________________________________________________________
 	    /**
@@ -281,7 +320,7 @@
 	     * the loading of the textfile
 	     * @throws IOException in the case that the fxml file gets deleted externally
 	     */
-	    private void loadWarningWindow() throws IOException {
+	    private void loadIOWarningWindow() throws IOException {
 	   		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("IOWarningWindow.fxml"));
 	    	Parent root1 = (Parent) fxmlLoader.load();
 	    	Stage stage = new Stage();
